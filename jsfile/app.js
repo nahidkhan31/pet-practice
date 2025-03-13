@@ -63,6 +63,7 @@ const displayPets = (pets) => {
     <p>${pet.pet_details}</p>
     <div class="card-actions justify-end">
       <button class="btn select bg-red-500">Select</button>
+      <button onclick="handelDetais('${pet.petId}')" class="btn select bg-green-400">Details</button>
     </div>
   </div>
 </div>
@@ -114,6 +115,14 @@ const getValueById = (id) => {
   const element = document.getElementById(id).innerText;
   const convertedValue = parseInt(element);
   return convertedValue;
+};
+
+const handelDetais = async (petId) => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
+  );
+  const data = await response.json();
+  console.log(data.petData);
 };
 
 loadPets("cat");
